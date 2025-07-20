@@ -85,3 +85,40 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #ca8a04;
 }
+
+/* Performance optimizations for animations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure animations don't get interrupted */
+.animate-pulse {
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+/* Hardware acceleration for better performance */
+.fixed {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Prevent animation flickering */
+svg {
+  shape-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure background animations stay visible */
+.animated-background {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts during animations */
+.particle-container {
+  contain: layout style paint;
+}
