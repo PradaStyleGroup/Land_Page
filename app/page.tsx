@@ -16,6 +16,7 @@ import {
   Target,
   Zap,
   Heart,
+  ChevronUp,
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -34,6 +35,7 @@ interface Project {
   mainImage: string
   images: string[]
   tags: string[]
+  videos?: string[]
 }
 
 interface Plan {
@@ -92,6 +94,21 @@ const projects: Project[] = [
   },
   {
     id: 3,
+    title: "Bunker Secret",
+    description: "Projeto exclusivo, realizado sob encomenda.",
+    mainImage: "https://imgur.com/I9plD84.jpg",
+    images: [
+      "https://imgur.com/geQtnKa.jpg", 
+      "https://imgur.com/NkyJMIw.jpg"
+    ],
+    videos: [
+      "http://198.1.195.202/videosland/bunkerarena.mp4",
+      "http://198.1.195.202/videosland/bunkerarena2.mp4"
+    ],
+    tags: ["PVP", "REINO UNIDO", "EXCLUSIVO", "AUDIO OCCLUSION"],
+  },
+  {
+    id: 4,
     title: "Arena Fluentes",
     description: "Projeto exclusivo, realizado sob encomenda para o maior servidor de PVP do cenario do Fivem - ARENA",
     mainImage: "https://imgur.com/KeQohl2.jpg",
@@ -103,7 +120,7 @@ const projects: Project[] = [
     tags: ["PVP", "REINO UNIDO", "EXCLUSIVO"],
   },
   {
-    id: 4,
+    id: 5,
     title: "Arena Fluentes",
     description: "Projeto exclusivo, realizado sob encomenda para o maior servidor de PVP do cenario do Fivem - ARENA",
     mainImage: "https://imgur.com/KP0rBGE.jpg",
@@ -115,7 +132,7 @@ const projects: Project[] = [
     tags: ["PVP", "REINO UNIDO", "EXCLUSIVO"],
   },
   {
-    id: 5,
+    id: 6,
     title: "Arena Fluentes",
     description: "Projeto exclusivo, realizado sob encomenda para o maior servidor de PVP do cenario do Fivem - ARENA",
     mainImage: "https://imgur.com/uUQJnTP.jpg",
@@ -786,6 +803,17 @@ function AboutStyleGroupSection() {
               </CardContent>
             </Card>
           ))}
+          {/* Retângulo especial */}
+          <div className="lg:col-span-3 md:col-span-2 col-span-1 mt-4">
+            <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 flex flex-col items-center justify-center shadow-lg">
+              <h3 className="text-2xl md:text-3xl font-bold text-yellow-500 mb-2">{t("aboutSpecialBoxTitle")}</h3>
+              <p className="text-gray-200 text-lg mb-4 text-center max-w-2xl" dangerouslySetInnerHTML={{ __html: t("aboutSpecialBoxSubtitle") }} />
+              <div className="flex items-center gap-2 mt-2">
+                <span className="text-3xl font-bold text-yellow-500">{t("aboutSpecialBoxClients").split(" ")[0]}</span>
+                <span className="text-white text-lg font-semibold">{t("aboutSpecialBoxClients").split(" ").slice(1).join(" ")}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1010,6 +1038,28 @@ export default function PortfolioLanding() {
   const [currentPage, setCurrentPage] = useState<"home" | "portfolio" | "contact" | "plans">("home")
   const [language, setLanguage] = useState<Language>("pt")
   const [, forceUpdate] = useState({})
+  // LIKE state
+  const [likeCount, setLikeCount] = useState(0)
+  const [liked, setLiked] = useState(false)
+
+  // Carrega o contador do localStorage ao montar
+  useEffect(() => {
+    const storedLikes = localStorage.getItem("landpage_like_count")
+    const storedLiked = localStorage.getItem("landpage_liked")
+    setLikeCount(storedLikes ? parseInt(storedLikes, 10) : 0)
+    setLiked(storedLiked === "true")
+  }, [])
+
+  // Função para dar like
+  const handleLike = () => {
+    if (!liked) {
+      const newCount = likeCount + 1
+      setLikeCount(newCount)
+      setLiked(true)
+      localStorage.setItem("landpage_like_count", newCount.toString())
+      localStorage.setItem("landpage_liked", "true")
+    }
+  }
 
   const handleLanguageChange = (lang: string) => {
     setCurrentLanguage(lang as Language)
@@ -1050,6 +1100,21 @@ export default function PortfolioLanding() {
         element.scrollIntoView({ behavior: "smooth" })
       }
     }
+  }
+
+  // Estado para mostrar/esconder botão de scroll to top
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 200)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   return (
@@ -1116,6 +1181,18 @@ export default function PortfolioLanding() {
 
         <div className="flex items-center space-x-4 mr-12">
           <LanguageSelector currentLanguage={language} onLanguageChange={handleLanguageChange} />
+          {/* Botão LIKE com texto 'Likes' antes do ícone */}
+          <button
+            onClick={handleLike}
+            disabled={liked}
+            className={`w-10 h-10 flex items-center justify-center rounded-xl border border-gray-700 bg-gray-900/70 hover:bg-yellow-500/10 transition-all duration-300 shadow-lg px-2 ${liked ? "opacity-60 cursor-not-allowed" : "hover:scale-105"}`}
+            title={liked ? "Você já curtiu!" : "Clique para curtir"}
+            style={{ minWidth: 90 }}
+          >
+            <span className="text-xs font-bold text-white mr-1 uppercase">LIKES</span>
+            <span className="text-xl">👍</span>
+            <span className="font-bold text-yellow-500 text-sm ml-1">{likeCount}</span>
+          </button>
         </div>
       </header>
 
@@ -1244,6 +1321,16 @@ export default function PortfolioLanding() {
           </div>
         </div>
       </footer>
+      {/* Botão flutuante de scroll to top */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black bg-transparent rounded-xl p-3 shadow-lg transition-all duration-300 flex items-center justify-center"
+          aria-label="Voltar ao topo"
+        >
+          <ChevronUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   )
 }

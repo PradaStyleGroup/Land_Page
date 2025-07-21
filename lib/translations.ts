@@ -17,7 +17,7 @@ export const translations = {
 
     // About Style Group
     aboutStyleGroupTitle: "Conheça a Style Group",
-    aboutStyleGroupSubtitle: "Uma agência especializada em criar experiências visuais únicas para o mundo FiveM",
+    aboutStyleGroupSubtitle: "Uma agência especializada em criar experiências únicas para o mundo do FiveM",
     ourTeam: "Nossa Equipe",
     ourTeamDesc:
       "Profissionais especializados em Modelagem 3D e Script's. trabalhando com paixão para entregar projetos únicos e inovadores.",
@@ -34,6 +34,9 @@ export const translations = {
     innovationDesc: "Sempre buscando novas tecnologias e técnicas para oferecer soluções criativas e diferenciadas.",
     passion: "Paixão pelo que fazemos",
     passionDesc: "Trabalhamos com amor e dedicação em cada detalhe, transformando ideias em realidade digital.",
+    aboutSpecialBoxTitle: "Conheça-nos de perto",
+    aboutSpecialBoxSubtitle: "Mais de <span class='font-bold text-yellow-500'>5.000 Mil</span> usuarios já visitaram nossa agência nos últimos 3 anos",
+    aboutSpecialBoxClients: "+999 Clientes satisfeitos",
 
     // Main Activities
     mainActivitiesTitle: "Principais Atuações",
@@ -205,6 +208,9 @@ export const translations = {
     innovationDesc: "Always seeking new technologies and techniques to offer creative and differentiated solutions.",
     passion: "Passion for what we do",
     passionDesc: "We work with love and dedication in every detail, transforming ideas into digital reality.",
+    aboutSpecialBoxTitle: "Get to know us up close",
+    aboutSpecialBoxSubtitle: "More than <span class='font-bold text-yellow-500'>5,000</span> people have visited our agency in the last 3 years",
+    aboutSpecialBoxClients: "+999 Satisfied clients",
 
     // Main Activities
     mainActivitiesTitle: "Main Activities",

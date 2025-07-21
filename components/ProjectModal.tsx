@@ -12,6 +12,7 @@ interface Project {
   mainImage: string
   images: string[]
   tags: string[]
+  videos?: string[] // Added videos to the interface
 }
 
 interface ProjectModalProps {
@@ -48,8 +49,19 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           </button>
         </div>
 
-        {/* Image Slider */}
+        {/* Image Slider + Vídeos */}
         <div className="relative">
+          {/* Vídeos do projeto */}
+          {project.videos && project.videos.length > 0 && (
+            <div className="flex flex-col gap-4 mb-4">
+              {project.videos.map((videoUrl, idx) => (
+                <video key={idx} controls className="w-full rounded-lg bg-black">
+                  <source src={videoUrl} type="video/mp4" />
+                  Seu navegador não suporta vídeo.
+                </video>
+              ))}
+            </div>
+          )}
           <div className="aspect-video bg-gray-800 relative overflow-hidden">
             <Image
               src={project.images[currentImageIndex] || "/placeholder.svg"}
