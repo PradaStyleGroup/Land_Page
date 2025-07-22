@@ -21,6 +21,15 @@ interface ProjectModalProps {
   onClose: () => void
 }
 
+function isYouTubeUrl(url: string) {
+  return /youtu(be)?\.([a-z]+)/.test(url) || url.includes("youtube.com");
+}
+function getYouTubeEmbedUrl(url: string) {
+  // Extrai o ID do vídeo do YouTube
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([\w-]{11})/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -55,10 +64,22 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
           {project.videos && project.videos.length > 0 && (
             <div className="flex flex-col gap-4 mb-4">
               {project.videos.map((videoUrl, idx) => (
-                <video key={idx} controls className="w-full rounded-lg bg-black">
-                  <source src={videoUrl} type="video/mp4" />
-                  Seu navegador não suporta vídeo.
-                </video>
+                isYouTubeUrl(videoUrl) ? (
+                  <div key={idx} className="aspect-video w-full rounded-lg overflow-hidden bg-black">
+                    <iframe
+                      src={getYouTubeEmbedUrl(videoUrl)}
+                      title={`YouTube video ${idx + 1}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full border-0"
+                    />
+                  </div>
+                ) : (
+                  <video key={idx} controls className="w-full rounded-lg bg-black">
+                    <source src={videoUrl} type="video/mp4" />
+                    Seu navegador não suporta vídeo.
+                  </video>
+                )
               ))}
             </div>
           )}

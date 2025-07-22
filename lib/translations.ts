@@ -172,6 +172,21 @@ export const translations = {
       "Texturizações especificas.",
       "Desenhos 2D para desenvolvimentos especiais.",
     ],
+    // Diferenciais e Experiências
+    highlightsTitle: "Diferenciais",
+    highlightMLO: "Criações de MLO",
+    highlightMLODesc: "Desenvolvimento completo de interiores personalizados, desde conceito até implementação final, criando ambientes únicos e otimizados para servidores FiveM.",
+    highlightAmb: "Ambientações",
+    highlightAmbDesc: "Criação de atmosferas imersivas através de iluminação profissional, texturas realistas e composição visual que transformam espaços em experiências memoráveis.",
+    highlightAudio: "Audio Occlusion",
+    highlightAudioDesc: "Implementação avançada de sistemas de oclusão sonora, criando experiências auditivas realistas que aumentam significativamente a imersão dos jogadores.",
+    highlightAnim: "Animações",
+    highlightAnimDesc: "Desenvolvimento de animações fluidas e naturais para objetos interativos, portas, elevadores e elementos dinâmicos que enriquecem a jogabilidade.",
+    highlightLOD: "Configurações de LOD's",
+    highlightLODDesc: "Otimização avançada de Level of Detail para interiores, garantindo máxima performance sem comprometer a qualidade visual dos ambientes criados.",
+    highlightConsult: "Consultoria Técnica",
+    highlightConsultDesc: "Assessoria especializada em projetos complexos, otimização de recursos e implementação de soluções inovadoras para servidores de alto desempenho.",
+    exclusiveCustomizations: "Exclusive Customizations",
   },
 
   en: {
@@ -341,6 +356,21 @@ export const translations = {
       "Unlimited revisions",
       "Delivery in up to 8 days",
     ],
+    // Highlights and Experiences
+    highlightsTitle: "Highlights",
+    highlightMLO: "MLO Creations",
+    highlightMLODesc: "Complete development of custom interiors, from concept to final implementation, creating unique and optimized environments for FiveM servers.",
+    highlightAmb: "Ambiences",
+    highlightAmbDesc: "Creation of immersive atmospheres through professional lighting, realistic textures, and visual composition that transform spaces into memorable experiences.",
+    highlightAudio: "Audio Occlusion",
+    highlightAudioDesc: "Advanced implementation of sound occlusion systems, creating realistic auditory experiences that significantly increase player immersion.",
+    highlightAnim: "Animations",
+    highlightAnimDesc: "Development of smooth and natural animations for interactive objects, doors, elevators, and dynamic elements that enrich gameplay.",
+    highlightLOD: "LOD Configurations",
+    highlightLODDesc: "Advanced Level of Detail optimization for interiors, ensuring maximum performance without compromising the visual quality of created environments.",
+    highlightConsult: "Technical Consulting",
+    highlightConsultDesc: "Specialized consulting for complex projects, resource optimization, and implementation of innovative solutions for high-performance servers.",
+    exclusiveCustomizations: "Exclusive Customizations",
   },
 }
 

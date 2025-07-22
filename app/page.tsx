@@ -26,6 +26,8 @@ import { ProjectModal } from "@/components/ProjectModal"
 import type { JSX } from "react/jsx-runtime"
 import { LanguageSelector } from "@/components/LanguageSelector"
 import { t, setCurrentLanguage, type Language } from "@/lib/translations"
+import { Toaster } from "@/components/ui/toaster"
+import { toast } from "@/hooks/use-toast"
 
 // Types
 interface Project {
@@ -102,8 +104,7 @@ const projects: Project[] = [
       "https://imgur.com/NkyJMIw.jpg"
     ],
     videos: [
-      "http://198.1.195.202/videosland/bunkerarena.mp4",
-      "http://198.1.195.202/videosland/bunkerarena2.mp4"
+      "https://youtu.be/8Ptc29xJSZQ"
     ],
     tags: ["PVP", "REINO UNIDO", "EXCLUSIVO", "AUDIO OCCLUSION"],
   },
@@ -1034,30 +1035,40 @@ function SkillsSection() {
   )
 }
 
+// Substituir o sistema de likes local por integração com API PHP global
+const API_URL = "http://198.1.195.202/videosland/likes.php"
+
 export default function PortfolioLanding() {
   const [currentPage, setCurrentPage] = useState<"home" | "portfolio" | "contact" | "plans">("home")
   const [language, setLanguage] = useState<Language>("pt")
   const [, forceUpdate] = useState({})
   // LIKE state
   const [likeCount, setLikeCount] = useState(0)
-  const [liked, setLiked] = useState(false)
 
-  // Carrega o contador do localStorage ao montar
+  // Buscar likes ao carregar
   useEffect(() => {
-    const storedLikes = localStorage.getItem("landpage_like_count")
-    const storedLiked = localStorage.getItem("landpage_liked")
-    setLikeCount(storedLikes ? parseInt(storedLikes, 10) : 0)
-    setLiked(storedLiked === "true")
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => setLikeCount(data.likes || 0))
+      .catch(() => setLikeCount(0))
   }, [])
 
   // Função para dar like
-  const handleLike = () => {
-    if (!liked) {
-      const newCount = likeCount + 1
-      setLikeCount(newCount)
-      setLiked(true)
-      localStorage.setItem("landpage_like_count", newCount.toString())
-      localStorage.setItem("landpage_liked", "true")
+  const handleLike = async () => {
+    try {
+      const res = await fetch(API_URL, { method: "POST" })
+      const data = await res.json()
+      setLikeCount(data.likes || likeCount + 1)
+      if (data.alreadyLiked) {
+        toast({
+          title: "Like já registrado!",
+          description: "Você já curtiu. Só é permitido 1 like por pessoa.",
+          variant: "success-yellow"
+        })
+      }
+    } catch {
+      // fallback local
+      setLikeCount(likeCount + 1)
     }
   }
 
@@ -1184,9 +1195,8 @@ export default function PortfolioLanding() {
           {/* Botão LIKE com texto 'Likes' antes do ícone */}
           <button
             onClick={handleLike}
-            disabled={liked}
-            className={`w-10 h-10 flex items-center justify-center rounded-xl border border-gray-700 bg-gray-900/70 hover:bg-yellow-500/10 transition-all duration-300 shadow-lg px-2 ${liked ? "opacity-60 cursor-not-allowed" : "hover:scale-105"}`}
-            title={liked ? "Você já curtiu!" : "Clique para curtir"}
+            className={"w-10 h-10 flex items-center justify-center rounded-xl border border-gray-700 bg-gray-900/70 hover:bg-yellow-500/10 transition-all duration-300 shadow-lg px-2 hover:scale-105"}
+            title="Clique para curtir"
             style={{ minWidth: 90 }}
           >
             <span className="text-xs font-bold text-white mr-1 uppercase">LIKES</span>
@@ -1321,6 +1331,7 @@ export default function PortfolioLanding() {
           </div>
         </div>
       </footer>
+      <Toaster />
       {/* Botão flutuante de scroll to top */}
       {showScrollTop && (
         <button
