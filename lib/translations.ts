@@ -8,10 +8,10 @@ export const translations = {
     contact: "CONTATO",
 
     // Hero Section
-    heroTitle: "Olá! me chamo Fabio de Almeida",
+    heroTitle: "Olá! Me chamo Fabio de Almeida! Conhecido como Prada!",
     heroSubtitle: "Engineer & Modelador 3D",
     heroDescription:
-      'Prazer em ter você aqui! Conheça-me um pouco melhor. Sou um Jovem de 25 anos apaixonado por calculos que mergulhou de cabeça a 7 anos para se tornar um Engenheiro! Criando ideias totalmente inovadoras para grandes empresas desligadas ao mundo de jogos. No ano de 2018 entrei para o Cenario do Fivem, trazendo conhecimentos externos que me cativaram a mergulhar novamente de cabeça em mais conhecimento, Modelagem 3D :) Desde então, em 2021 criei minha "Pequena Lojinha" para um publico fechado de cidade, na atuação de pequenos serviços! E de la para cá podemos tornar-la uma magnifica Agência para o Fivem, Style Group! Atuações para os principais servidores de todo o mundo! Você com toda certeza terá um otimo serviço realizado comigo!',
+      'Prazer em ter você aqui! Conheça-me um pouco melhor. Sou um Jovem de 25 anos apaixonado por calculos que mergulhou de cabeça a 7 anos para se tornar um Engenheiro! Criando ideias totalmente inovadoras para grandes empresas desligadas ao mundo de jogos. No ano de 2018 entrei para o Cenario do Fivem, trazendo conhecimentos externos que me cativaram a mergulhar novamente de cabeça na Modelagem 3D :), Desde então, em 2021 criei minha "Pequena Lojinha" para um publico fechado de cidade, na atuação de pequenos serviços, com outros focos no Fivem! E de la para cá podemos tornar-la uma magnifica Agência para o Fivem, Style Group! Atuações para os principais servidores de todo o mundo! Você com toda certeza terá um otimo serviço realizado comigo!',
     viewPortfolio: "Ver Portfólio",
     about: "Sobre",
 
