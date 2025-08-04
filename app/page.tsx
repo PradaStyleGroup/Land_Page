@@ -148,7 +148,7 @@ const projects: Project[] = [
 
 const companies: Company[] = [
   {
-    name: "Arena PvP",
+    name: "Arena",
     image: "https://imgur.com/T4LObXi.jpg",
   },
   {
@@ -156,7 +156,7 @@ const companies: Company[] = [
     image: "https://imgur.com/dkEllrq.jpg",
   },
   {
-    name: "Latinos PvP",
+    name: "Latinos",
     image: "https://imgur.com/hmPutCn.jpg",
   },
   {
